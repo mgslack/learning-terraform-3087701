@@ -18,18 +18,18 @@ data "aws_vpc" "default" {
   default = true
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "blog" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
 
-  vpc_security_group_ids = [module.web_sq.security_group_id]
+  vpc_security_group_ids = [module.blog_sq.security_group_id]
 
   tags = {
     Name = "HelloWorld"
   }
 }
 
-module "web_sg" {
+module "blog_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.1.0"
   name    = "web_new"
